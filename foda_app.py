@@ -12,6 +12,7 @@ from google.oauth2.service_account import Credentials
 import time
 from datetime import datetime
 import os
+from oauth2client.service_account import ServiceAccountCredentials
 
 # ─────────────────────────────────────────────
 # CONFIGURACIÓN DE LA PÁGINA (Debe ser el primer comando)
@@ -26,9 +27,6 @@ st.set_page_config(
 # CONSTANTES Y CREDENCIALES – Edita estos valores
 # ─────────────────────────────────────────────
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY") 
-
-# Agregamos la ruta de tu archivo JSON (la raíz que configuramos en Easypanel)
-SERVICE_ACCOUNT_JSON = "desarrollo.json"
 
 GOOGLE_SHEET_NAME = "1XB5A222mk9a5olSPQTwn-Nm3uLjp62OvKMQu_KzrYo0"          
 WORKSHEET_NAME    = "Respuestas"                                          
@@ -71,17 +69,18 @@ st.markdown("""
 @st.cache_resource
 def get_gsheet_client():
     """Conecta con Google Sheets usando la cuenta de servicio."""
-    scopes = [
+    scope = [
+        "https://spreadsheets.google.com/feeds",
         "https://www.googleapis.com/auth/spreadsheets",
         "https://www.googleapis.com/auth/drive",
     ]
     try:
         # Aquí corregimos la forma en que carga las credenciales
-        creds = Credentials.from_service_account_file(SERVICE_ACCOUNT_JSON, scopes=scopes)
+        creds  = ServiceAccountCredentials.from_json_keyfile_name("desarrollo.json", scope)
         client = gspread.authorize(creds)
         return client
     except Exception as e:
-        st.error(f"❌ Error conectando con Google Sheets. Verifica que '{SERVICE_ACCOUNT_JSON}' exista. Detalle: {e}")
+        st.error(f"❌ Error conectando con Google Sheets. Verifica que '{Sesarrollo.json}' exista. Detalle: {e}")
         return None
 
 def ensure_headers(worksheet):

@@ -2,11 +2,11 @@ import streamlit as st
 import gspread
 from google.oauth2.service_account import Credentials
 from datetime import datetime
-
+from oauth2client.service_account import ServiceAccountCredentials
 # ─────────────────────────────────────────────
 # CONFIGURACIÓN EXACTA DE TU PROYECTO
 # ─────────────────────────────────────────────
-SERVICE_ACCOUNT_JSON = "/desarrollo.json"
+SERVICE_ACCOUNT_JSON = "desarrollo.json"
 GOOGLE_SHEET_KEY = "1XB5A222mk9a5olSPQTwn-Nm3uLjp62OvKMQu_KzrYo0"
 WORKSHEET_NAME = "Respuestas"
 
@@ -25,11 +25,12 @@ if st.button("Enviar a Google Sheets 🚀", type="primary"):
         with st.spinner("Conectando con Google..."):
             try:
                 # Intentar conectar con las credenciales
-                scopes = [
-                    "https://www.googleapis.com/auth/spreadsheets",
-                    "https://www.googleapis.com/auth/drive"
-                ]
-                creds = Credentials.from_service_account_file(SERVICE_ACCOUNT_JSON, scopes=scopes)
+                scope = [
+                        "https://spreadsheets.google.com/feeds",
+                        "https://www.googleapis.com/auth/spreadsheets",
+                        "https://www.googleapis.com/auth/drive",
+                    ]
+                creds = ServiceAccountCredentials.from_json_keyfile_name(SERVICE_ACCOUNT_JSON, scopes=scope)
                 client = gspread.authorize(creds)
                 
                 # Buscar el documento y la pestaña

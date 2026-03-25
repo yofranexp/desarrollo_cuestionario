@@ -202,12 +202,12 @@ if boton:
         for i, (f, o) in enumerate(pares_fo):
             estrategias_fo.append(cruzar_con_ia(f, o, "oportunidad"))
             barra.progress((i + 1) / 6, text=f"Cruce FO{i+1} listo…")
-            time.sleep(0.3)
+            time.sleep(3)
 
         for i, (f, a) in enumerate(pares_fa):
             estrategias_fa.append(cruzar_con_ia(f, a, "amenaza"))
             barra.progress((3 + i + 1) / 6, text=f"Cruce FA{i+1} listo…")
-            time.sleep(0.3)
+            time.sleep(3)
 
         barra.progress(1.0, text="✅ Análisis completo")
 

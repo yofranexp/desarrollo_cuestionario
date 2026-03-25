@@ -15,3 +15,4 @@ google-auth>=2.29.0
 
 # (ya incluido en google-auth, pero explícito por si acaso)
 google-auth-oauthlib>=1.2.0
+numpy

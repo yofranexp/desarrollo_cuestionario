@@ -11,6 +11,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 import time
 from datetime import datetime
+import os
 
 # ─────────────────────────────────────────────
 # CONFIGURACIÓN DE LA PÁGINA (Debe ser el primer comando)
@@ -25,7 +26,7 @@ st.set_page_config(
 # CONSTANTES Y CREDENCIALES – Edita estos valores
 # ─────────────────────────────────────────────
 # ⚠️ Reemplaza "TU_API_KEY_AQUI" con tu token real de Google AI Studio
-GEMINI_API_KEY = "AIzaSyCG3zulWevX-jeNWikoJQ7L3loasniiO4c" 
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY") 
 
 GOOGLE_SHEET_NAME = "1XB5A222mk9a5olSPQTwn-Nm3uLjp62OvKMQu_KzrYo0"          
 WORKSHEET_NAME    = "Respuestas"                                          

@@ -25,8 +25,10 @@ st.set_page_config(
 # ─────────────────────────────────────────────
 # CONSTANTES Y CREDENCIALES – Edita estos valores
 # ─────────────────────────────────────────────
-# ⚠️ Reemplaza "TU_API_KEY_AQUI" con tu token real de Google AI Studio
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY") 
+
+# Agregamos la ruta de tu archivo JSON (la raíz que configuramos en Easypanel)
+SERVICE_ACCOUNT_JSON = "/desarrollo.json"
 
 GOOGLE_SHEET_NAME = "1XB5A222mk9a5olSPQTwn-Nm3uLjp62OvKMQu_KzrYo0"          
 WORKSHEET_NAME    = "Respuestas"                                          
@@ -56,10 +58,10 @@ st.markdown("""
         padding: 1rem 1.2rem;
         border-radius: 8px;
         margin-top: 0.8rem;
-        color: #1b5e20; /* Color de texto oscuro para que se lea en Dark Mode */
+        color: #1b5e20; 
     }
-    h1 { color: #8c9eff; } /* Azul claro para contrastar con fondo oscuro */
-    h3 { color: #8c9eff; } /* Azul claro para contrastar con fondo oscuro */
+    h1 { color: #8c9eff; } 
+    h3 { color: #8c9eff; } 
 </style>
 """, unsafe_allow_html=True)
 
@@ -74,7 +76,8 @@ def get_gsheet_client():
         "https://www.googleapis.com/auth/drive",
     ]
     try:
-        creds  = ServiceAccountCredentials.from_json_keyfile_name("desarrollo.json", scope)
+        # Aquí corregimos la forma en que carga las credenciales
+        creds = Credentials.from_service_account_file(SERVICE_ACCOUNT_JSON, scopes=scopes)
         client = gspread.authorize(creds)
         return client
     except Exception as e:

@@ -6,7 +6,7 @@ from datetime import datetime
 # ─────────────────────────────────────────────
 # CONFIGURACIÓN EXACTA DE TU PROYECTO
 # ─────────────────────────────────────────────
-SERVICE_ACCOUNT_JSON = "desarrollo.json"
+SERVICE_ACCOUNT_JSON = "/desarrollo.json"
 GOOGLE_SHEET_KEY = "1XB5A222mk9a5olSPQTwn-Nm3uLjp62OvKMQu_KzrYo0"
 WORKSHEET_NAME = "Respuestas"
 

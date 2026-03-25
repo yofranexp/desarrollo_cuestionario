@@ -28,7 +28,7 @@ st.set_page_config(
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY") 
 
 # Agregamos la ruta de tu archivo JSON (la raíz que configuramos en Easypanel)
-SERVICE_ACCOUNT_JSON = "/desarrollo.json"
+SERVICE_ACCOUNT_JSON = "desarrollo.json"
 
 GOOGLE_SHEET_NAME = "1XB5A222mk9a5olSPQTwn-Nm3uLjp62OvKMQu_KzrYo0"          
 WORKSHEET_NAME    = "Respuestas"                                          

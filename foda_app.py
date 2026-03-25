@@ -30,8 +30,6 @@ GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 
 GOOGLE_SHEET_NAME = "1XB5A222mk9a5olSPQTwn-Nm3uLjp62OvKMQu_KzrYo0"          
 WORKSHEET_NAME    = "Respuestas"                                          
-SERVICE_ACCOUNT_JSON = "/app/desarrollo.json"  
-
 HEADERS = [
     "Timestamp",
     "Fortaleza 1", "Fortaleza 2", "Fortaleza 3",
@@ -76,7 +74,7 @@ def get_gsheet_client():
         "https://www.googleapis.com/auth/drive",
     ]
     try:
-        creds = Credentials.from_service_account_file(SERVICE_ACCOUNT_JSON, scopes=scopes)
+        creds  = ServiceAccountCredentials.from_json_keyfile_name("desarrollo.json", scope)
         client = gspread.authorize(creds)
         return client
     except Exception as e:
